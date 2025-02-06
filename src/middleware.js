@@ -6,31 +6,35 @@ export async function middleware(req) {
 
   const { pathname } = req.nextUrl;
 
-  // Define role-based protected routes
-  const adminRoutes = ["/admin"];
-  const userRoutes = ["/dashboard", "/profile"];
+  const protectedRoutes = ["/task-list", "/assign-task-list"];
+  const authRoutes = ["/login", "/sign-up"];
 
-  // If there's no token (user is not logged in)
+  // Redirect everyone to /login if they are on the home page
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  // Allow unauthenticated access to login and sign-up pages
   if (!token) {
-    return NextResponse.redirect(new URL("/auth/login", req.url));
-  }
-
-  // Check if the user is trying to access an admin-only route
-  if (adminRoutes.some((route) => pathname.startsWith(route))) {
-    if (token.role !== "admin") {
-      return NextResponse.redirect(new URL("/unauthorized", req.url)); // Redirect unauthorized users
+    if (!authRoutes.includes(pathname)) {
+      return NextResponse.redirect(new URL("/login", req.url));
     }
-  }
-
-  // Allow access to user routes (dashboard, profile) if logged in
-  if (userRoutes.some((route) => pathname.startsWith(route))) {
     return NextResponse.next();
   }
 
-  return NextResponse.next(); // Allow access to other public routes
+  // Prevent logged-in users from accessing login/sign-up
+  if (authRoutes.includes(pathname)) {
+    return NextResponse.redirect(new URL("/task-list", req.url));
+  }
+
+  // Restrict /assign-task-list to admins only
+  if (pathname === "/assign-task-list" && token.role !== "admin") {
+    return NextResponse.redirect(new URL("/unauthorized", req.url));
+  }
+
+  return NextResponse.next();
 }
 
-// Define which routes should trigger the middleware
 export const config = {
-  matcher: ["/admin/:path*", "/dashboard/:path*", "/profile/:path*"], // Apply middleware to these routes
+  matcher: ["/", "/login", "/sign-up", "/task-list", "/assign-task-list"],
 };
