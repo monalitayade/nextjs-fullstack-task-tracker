@@ -25,7 +25,7 @@ const Login = () => {
     if (response?.error) {
       console.log("Invalid credentials.");
     } else {
-      router.push("/");
+      router.push("/task-list");
     }
   };
 

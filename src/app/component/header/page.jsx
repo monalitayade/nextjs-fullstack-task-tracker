@@ -1,16 +1,17 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Logo from "@/assets/images/logo.svg";
 import Search from "@/assets/images/search.svg";
 import Profile from "@/assets/images/Profile.svg";
 import Cart from "@/assets/images/Cart.svg";
 
 function Header() {
-  // const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
-  // console.log("session", session);
+  //status for login/logout button
+  console.log("session", session?.user?.role, status);
 
   return (
     <header className="w-full flex bg-red-300 py-3 px-2">
@@ -26,11 +27,20 @@ function Header() {
         </a>
       </div>
       <div className="w-auto text-white text-2xl">Task Tracker</div>
-      <a
-        href="/assign-task"
-        className="ml-auto bg-white rounded-sm px-5 py-2 text-red-300">
-        Assign Task
-      </a>
+      {session?.user?.role === "admin" && (
+        <a
+          href="/assign-task"
+          className="ml-auto bg-white rounded-sm px-5 py-2 text-red-300">
+          Assign Task
+        </a>
+      )}
+      {session && (
+        <button
+          onClick={() => signOut()}
+          className="ml-4 bg-red-500 text-white px-4 py-2 rounded">
+          Logout
+        </button>
+      )}
       {/* <nav className="w-full flex flex-row justify-between items-center">
         <ul className="flex">
           <li className="flex px-4">
