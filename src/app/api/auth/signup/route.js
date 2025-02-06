@@ -61,7 +61,7 @@ export async function POST(request) {
     const newUser = new User({
       username,
       email,
-      role,
+      role: role.toLowerCase(),
       password: hashedPassword,
     });
 

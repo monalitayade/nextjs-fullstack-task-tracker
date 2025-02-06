@@ -15,7 +15,50 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  /* color: var(--foreground); */
+  /* background: var(--background); */
   font-family: Arial, Helvetica, sans-serif;
+}
+.custom-nth:nth-child(3n) {
+  margin-right: 0;
+}
+
+.form-bg-glass-effect {
+  background: rgba(121, 120, 233, 0.2); /* #7978e9 with transparency */
+  border-radius: 15px;
+  padding: 20px;
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  color: white; /* Adjust text color for contrast */
+  /* width: 300px; */
+  text-align: center;
+}
+.toast-msg {
+  position: fixed;
+  top: -100px; /* Start position (hidden) */
+  right: 3%;
+  transform: translateX(-50%);
+  background: #7978e9;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: top 0.5s ease-in-out, opacity 0.5s;
+}
+.toast-msg.show {
+  animation: slideDown 0.5s ease-in-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    top: -100px;
+    opacity: 0;
+  }
+  to {
+    top: 20px;
+    opacity: 1;
+  }
 }
