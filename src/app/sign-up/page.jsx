@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import ToastPop from "@/app/component/toastmessage/page";
 
 const SignUp = () => {
   const router = useRouter();
@@ -41,15 +42,18 @@ const SignUp = () => {
   };
 
   return (
-    <div className="w-full h-[100vh] flex flex-wrap justify-center items-center bg-slate-300">
-      <div className="w-1/3 flex justify-center items-center flex-col bg-gray-700 p-3 border rounded-md">
-        <h1 className="text-white">Sign In</h1>
+    <div className="w-full h-[100vh] flex flex-wrap justify-center items-center bg-[#F5F7FF]">
+      <ToastPop message={error} setError={setError} />
+      <div className="w-1/3 flex justify-center items-center flex-col form-bg-glass-effect p-3 border rounded-md">
+        <h1 className="text-[#7978e9] uppercase text-2xl font-semibold">
+          Sign Up
+        </h1>
         <form className="w-full flex flex-col" onSubmit={handleSubmit}>
           <div className="w-full flex flex-col">
             <input
               type="text"
               id="username"
-              className="p-2 mt-2 rounded-md text-black"
+              className="p-2 mt-2 rounded-md text-[#7978e9] focus:outline-none"
               placeholder="User name"
               value={form.username}
               onChange={(e) => setForm({ ...form, username: e.target.value })}
@@ -59,7 +63,7 @@ const SignUp = () => {
             <input
               type="email"
               id="email"
-              className="p-2 mt-2 rounded-md text-black"
+              className="p-2 mt-2 rounded-md text-[#7978e9] focus:outline-none"
               placeholder="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -69,7 +73,7 @@ const SignUp = () => {
             <input
               type="text"
               id="role"
-              className="p-2 mt-2 rounded-md text-black"
+              className="p-2 mt-2 rounded-md text-[#7978e9] focus:outline-none"
               placeholder="Role"
               value={form.role}
               onChange={(e) => setForm({ ...form, role: e.target.value })}
@@ -79,7 +83,7 @@ const SignUp = () => {
             <input
               type="password"
               id="password"
-              className="p-2 mt-2 rounded-md text-black"
+              className="p-2 mt-2 rounded-md text-[#7978e9] focus:outline-none"
               placeholder="Password"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
@@ -89,7 +93,7 @@ const SignUp = () => {
             <input
               type="password"
               id="cpassword"
-              className="p-2 mt-2 rounded-md text-black"
+              className="p-2 mt-2 rounded-md text-[#7978e9] focus:outline-none"
               placeholder="Confirm Password"
               value={form.cpassword}
               onChange={(e) => setForm({ ...form, cpassword: e.target.value })}
@@ -98,20 +102,20 @@ const SignUp = () => {
           <div className="w-full flex flex-col mt-9">
             <button
               type="submit"
-              className="bg-blue-500 text-white p-2 rounded-md"
+              className="bg-[#7978e9] text-white p-2 rounded-md font-semibold focus:outline-none"
               disabled={pending ? true : false}>
-              Sign In
+              Sign Up
             </button>
           </div>
-          <div className="w-full flex flex-col mt-9 text-red-600 text-center">
+          {/* <div className="w-full flex flex-col mt-9 text-red-600 text-center">
             {error}
-          </div>
+          </div> */}
 
           <div className="w-full flex flex-col">
-            <p className="text-white text-right my-2 text-sm">
+            <p className="text-[#7978e9] text-right my-2 text-sm">
               Already have an account?{" "}
-              <a href="/login" className="border-0 border-b-2">
-                Sign Up
+              <a href="/login" className="border-0 border-b-2 border-[#7978e9]">
+                Sign In
               </a>
             </p>
           </div>
