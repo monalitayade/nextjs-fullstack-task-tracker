@@ -28,7 +28,7 @@ export async function middleware(req) {
   }
 
   // Restrict /assign-task-list to admins only
-  if (pathname === "/assign-task-list" && token.role !== "admin") {
+  if (pathname === "/assign-task" && token.role !== "admin") {
     return NextResponse.redirect(new URL("/unauthorized", req.url));
   }
 
@@ -36,5 +36,5 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ["/", "/login", "/sign-up", "/task-list", "/assign-task-list"],
+  matcher: ["/", "/login", "/sign-up", "/task-list", "/assign-task"],
 };

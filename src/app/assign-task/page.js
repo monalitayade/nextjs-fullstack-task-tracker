@@ -91,23 +91,18 @@ const page = () => {
   };
 
   return (
-    <div className="w-full h-[100vh] flex flex-wrap justify-center items-center bg-slate-300">
-      <div className="w-1/3 flex justify-center items-center flex-col bg-gray-700 p-3 border rounded-md">
-        <h1 className="text-white text-xl mb-3">Assign Task</h1>
-        <form className="w-full flex flex-col" onSubmit={handleTaskSubmit}>
-          {/* <div className="w-full flex flex-col">
-            <select
-              className="text-black focus:outline-none py-2"
-              placeholder="Assignee">
-              <option key={assigner[0]} value={assigner[0]}>
-                {assigner[0]}
-              </option>
-            </select>
-          </div> */}
-          <div className="w-full flex flex-col mt-3">
+    <div className="w-full min-h-[90.5vh] flex flex-wrap justify-center items-center bg-[#F5F7FF] p-4">
+      <div className="w-1/2 flex justify-center items-center flex-col px-7 py-7 border rounded-md shadow-lg">
+        <h1 className="text-[#7978e9] text-xl font-semibold mb-3">
+          Assign Task
+        </h1>
+        <form
+          className="w-full flex flex-wrap flex-row"
+          onSubmit={handleTaskSubmit}>
+          <div className="w-[48%] flex flex-col mr-[2%]">
             <select
               id="taskassignee"
-              className="text-black focus:outline-none py-2"
+              className="text-[#7978e9] focus:outline-none py-2"
               placeholder="Assign to"
               value={taskForm.taskassignee}
               onChange={(e) =>
@@ -119,11 +114,11 @@ const page = () => {
               })}
             </select>
           </div>
-          <div className="w-full flex flex-col mt-3">
+          <div className="w-[48%] flex flex-col">
             <input
               type="text"
               id="taskName"
-              className="p-2 mt-2  text-black"
+              className="p-2 w-full text-[#7978e9] focus:outline-none"
               placeholder="Task name"
               value={taskForm.taskName}
               onChange={(e) =>
@@ -131,24 +126,10 @@ const page = () => {
               }
             />
           </div>
-
-          <div className="w-full flex flex-col mt-3">
-            <textarea
-              id="taskDesc"
-              className="text-black p-2 resize-none"
-              placeholder="Task description"
-              cols={5}
-              rows={3}
-              value={taskForm.taskDesc}
-              onChange={(e) =>
-                setTaskForm({ ...taskForm, taskDesc: e.target.value })
-              }></textarea>
-          </div>
-
-          <div className="w-full flex flex-col mt-3">
+          <div className="w-[48%] flex flex-col mt-3">
             <select
               id="taskStatus"
-              className="text-black focus:outline-none py-2"
+              className="text-[#7978e9] focus:outline-none py-2 focus:outline-none"
               placeholder="Assignee"
               name="taskStatus"
               value={taskForm.taskStatus}
@@ -161,11 +142,24 @@ const page = () => {
               })}
             </select>
           </div>
+          <div className="w-[100%] flex flex-col mt-3">
+            <textarea
+              id="taskDesc"
+              className="text-[#7978e9] p-2 resize-none focus:outline-none"
+              placeholder="Task description"
+              cols={5}
+              rows={3}
+              value={taskForm.taskDesc}
+              onChange={(e) =>
+                setTaskForm({ ...taskForm, taskDesc: e.target.value })
+              }></textarea>
+          </div>
+
           <div className="w-full flex flex-col mt-9">{error}</div>
           <div className="w-full flex flex-col mt-9">
             <button
               type="submit"
-              className="bg-blue-500 text-white p-2 rounded-md"
+              className="bg-[#7978e9] text-white p-2 rounded-md font-semibold"
               disabled={loading ? true : false}>
               Assign Task
             </button>

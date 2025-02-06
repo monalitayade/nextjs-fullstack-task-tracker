@@ -25,6 +25,10 @@ const handler = NextAuth({
         //Find user by email
         const user = await User.findOne({ email: credentials.email });
 
+        if (credentials.email === "" || credentials?.password === "") {
+          throw new Error("All fields are required !");
+        }
+
         if (!user) {
           console.log("User not found:", credentials.email);
           throw new Error("No user found");
@@ -40,7 +44,7 @@ const handler = NextAuth({
         console.log("Password valid:", isValid);
 
         if (!isValid) {
-          throw new Error("Invalid password");
+          throw new Error("Invalid credentials.");
         }
 
         return {

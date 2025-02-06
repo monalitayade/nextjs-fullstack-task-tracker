@@ -128,7 +128,7 @@ export default function Home() {
                 className="w-[calc((100%-32px)/3)] mr-4 flex mb-4 custom-nth"
                 key={t}>
                 <div className="w-full flex flex-col border rounded-lg shadow-md">
-                  <div className="w-full flex bg-red-300 rounded-lg p-2">
+                  <div className="w-full flex bg-[#4747A1] text-[#fff] rounded-lg p-2">
                     Task [ {t + 1} ]
                   </div>
                   <div className="w-full p-2">
