@@ -22,7 +22,14 @@ body {
 .custom-nth:nth-child(3n) {
   margin-right: 0;
 }
-
+@media (min-width: 640px) {
+  .custom-nth:nth-child(2n) {
+    margin-right: 0;
+  }
+  .custom-nth:nth-child(3n) {
+    margin-right: 16px;
+  }
+}
 .form-bg-glass-effect {
   background: rgba(121, 120, 233, 0.2); /* #7978e9 with transparency */
   border-radius: 15px;
