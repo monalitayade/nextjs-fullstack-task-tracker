@@ -10,7 +10,7 @@ import Profile from "@/assets/images/profile.svg";
 import Nav from "@/assets/images/nav.svg";
 import Notification from "@/assets/images/notification.svg";
 
-function Header({ setMobMenu }) {
+function Header({ setMobMenu, mobMenu }) {
   const { data: session, status } = useSession();
 
   const router = useRouter();
@@ -28,11 +28,19 @@ function Header({ setMobMenu }) {
   };
 
   return (
-    <header className="w-full flex flex-row bg-[#7978e9] py-3 px-2 shadow-slate-600">
+    <header className="w-full flex flex-row bg-[#7978e9] py-3 px-2 drop-shadow-lg">
       <div className="lg:hidden flex w-10 mr-3">
-        <button className="w-full" onClick={() => setMobMenu(true)}>
-          <Image w={10} h={10} alt="navigation" src={Nav} />
-        </button>
+        {mobMenu ? (
+          <button
+            className="w-full text-white"
+            onClick={() => setMobMenu(false)}>
+            X
+          </button>
+        ) : (
+          <button className="w-full" onClick={() => setMobMenu(true)}>
+            <Image w={10} h={10} alt="navigation" src={Nav} />
+          </button>
+        )}
       </div>
       <div className="w-full flex items-center">
         <a href="/" className="text-black mr-3">

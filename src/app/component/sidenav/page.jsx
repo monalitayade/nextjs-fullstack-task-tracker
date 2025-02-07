@@ -5,7 +5,7 @@ const page = () => {
   const { data: session, status } = useSession();
 
   return (
-    <div className="flex flex-col lg:min-h-[90.5vh] sm:min-h-[unset] w-full bg-[#7978e9] text-white font-semibold text-2xl py-4 ">
+    <div className="flex flex-col lg:min-h-[90.5vh] min-h-screen w-full bg-[#7978e9] text-white font-semibold text-2xl py-4 ">
       <ul>
         {session?.user?.role === "admin" && (
           <li className="border-0 border-b-[1px] border-[#ccc] px-4">

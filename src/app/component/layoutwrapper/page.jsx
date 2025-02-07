@@ -9,17 +9,19 @@ const page = ({ children }) => {
 
   const [mobMenu, setMobMenu] = useState(false);
 
-  console.log("pathname", pathname);
+  console.log("setMobMenu", mobMenu);
 
-  //   const hideComponent = pathname === "/login" || pathname === "/sign-up";
   const hideComponent = ["/login", "/sign-up"].includes(pathname);
 
   return (
     <div className="flex flex-col">
-      {!hideComponent && <Header setMobMenu={setMobMenu} />}
-      <div className="flex w-full">
+      {!hideComponent && <Header setMobMenu={setMobMenu} mobMenu={mobMenu} />}
+      <div className="flex w-full lg:static fixed top-[54px] left-0">
         {!hideComponent && (
-          <div className={`w-[23%] lg:flex hidden`}>
+          <div
+            className={`md:w-[23%] w-[50%] lg:flex lg:static fixed top-[54px] transition-all duration-200 ease-in-out ${
+              mobMenu ? "left-0" : "left-[-100%]"
+            } `}>
             <Sidenav />
           </div>
         )}
