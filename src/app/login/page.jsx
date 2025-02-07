@@ -35,7 +35,7 @@ const Login = () => {
   return (
     <div className="w-full h-[100vh] flex flex-wrap justify-center items-center bg-[#F5F7FF]">
       <ToastPop message={error} setError={setError} />
-      <div className="w-1/3 flex justify-center items-center flex-col form-bg-glass-effect p-3 border rounded-md">
+      <div className="lg:w-1/3 w-10/12 flex justify-center items-center flex-col form-bg-glass-effect p-3 border rounded-md ">
         <h1 className="text-[#7978e9] uppercase text-2xl font-semibold">
           Sign In
         </h1>

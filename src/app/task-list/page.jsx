@@ -125,7 +125,7 @@ export default function Home() {
           tasklist?.map((task, t) => {
             return (
               <div
-                className="w-[calc((100%-32px)/3)] mr-4 flex mb-4 custom-nth"
+                className="lg:w-[calc((100%-32px)/3)] md:w-[calc((100%-16px)/2)] w-full md:mr-4 flex mb-4 custom-nth"
                 key={t}>
                 <div className="w-full flex flex-col border rounded-lg shadow-md">
                   <div className="w-full flex bg-[#4747A1] text-[#fff] rounded-lg p-2">
