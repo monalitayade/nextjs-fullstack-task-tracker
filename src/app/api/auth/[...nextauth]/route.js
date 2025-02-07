@@ -61,6 +61,7 @@ const handler = NextAuth({
   },
   session: {
     strategy: "jwt", // Using JWT for session management
+    maxAge: 30 * 60,
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -71,6 +72,7 @@ const handler = NextAuth({
         // token.email = user.email;
         // token.name = user.name;
         token.role = user.role;
+        token.exp = Math.floor(Date.now() / 1000) + 30 * 60;
       }
       return token;
     },
@@ -78,6 +80,9 @@ const handler = NextAuth({
       // session.user.id = token.id;
       // session.user.email = token.email;
       // session.user.name = token.name;
+      if (token.exp && token.exp < Math.floor(Date.now() / 1000)) {
+        throw new Error("Session expired"); // Handle expired session
+      }
       session.user.role = token.role;
       return session;
     },

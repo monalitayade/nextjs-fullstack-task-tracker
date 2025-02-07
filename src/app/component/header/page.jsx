@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { use, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -26,6 +26,18 @@ function Header({ setMobMenu, mobMenu }) {
   const logoutPopup = () => {
     setLogoutPopUp((prev) => !prev);
   };
+
+  useEffect(() => {
+    const checkExpiry = () => {
+      if (session?.user?.expires < Math.floor(Date.now() / 1000)) {
+        signOut(); // 🔴 **Logout user when session expires**
+      }
+    };
+
+    const timer = setInterval(checkExpiry, 10000); // ⏳ Check every 10 seconds
+
+    return () => clearInterval(timer);
+  }, [session]);
 
   return (
     <header className="w-full flex flex-row bg-[#7978e9] py-3 px-2 drop-shadow-lg">
