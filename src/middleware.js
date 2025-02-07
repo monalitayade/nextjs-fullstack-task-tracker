@@ -32,6 +32,12 @@ export async function middleware(req) {
     return NextResponse.redirect(new URL("/unauthorized", req.url));
   }
 
+  // Check if token is expired
+  const currentTime = Math.floor(Date.now() / 1000);
+  if (token.exp < currentTime) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
   return NextResponse.next();
 }
 
