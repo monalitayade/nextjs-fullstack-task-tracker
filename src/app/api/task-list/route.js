@@ -21,7 +21,8 @@ export async function POST(req) {
       assignee: taskassignee,
       taskname: taskName,
       taskdesc: taskDesc,
-      status: taskStatus.toLowerCase(),
+      status: taskStatus.toLowerCase() || "incomeplete",
+      seen: false,
     });
 
     await newTask.save();
@@ -41,6 +42,48 @@ export async function POST(req) {
     return NextResponse.json(
       { success: false, message: "Something went wrong !" },
       { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(req) {
+  const { taskId, status, seen } = await req.json();
+
+  try {
+    if (!taskId) {
+      return NextResponse.json(
+        { success: false, message: "Task id is mandatory." },
+        { Status: 400 }
+      );
+    }
+
+    await connectToDatabase();
+
+    const UpdatedTask = await TaskList.findOneAndUpdate(
+      { taskId },
+      { ...(status && { status }), ...(seen !== undefined && { seen }) },
+      { new: true }
+    );
+
+    if (!UpdatedTask) {
+      return NextResponse.json(
+        { success: false, message: "Task not found." },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Task has been updated successfully!",
+        task: UpdatedTask,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { success: false, message: "Something went wrong!" },
+      { status: "500" }
     );
   }
 }
