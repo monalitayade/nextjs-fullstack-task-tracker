@@ -13,7 +13,6 @@ export default function Home() {
       const userResponse = await fetch("/api/get-task-list");
       const data = await userResponse.json();
 
-      console.log("userResponse", data);
       setLoading(false);
       setTaskList(data?.tasklist);
     } catch (err) {

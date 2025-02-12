@@ -6,8 +6,7 @@ export async function GET() {
   try {
     await connectToDatabase();
 
-    const tasklist = await TaskList.find();
-
+    const tasklist = await TaskList.find().sort({ createdAt: -1 });
     return NextResponse.json(
       { success: true, message: "Task List fetched successfully !", tasklist },
       { status: 200 }

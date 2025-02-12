@@ -69,7 +69,7 @@ const page = () => {
 
   const handleTaskSubmit = async (e) => {
     e.preventDefault();
-    console.log("taskForm", taskForm);
+    // console.log("taskForm", taskForm);
     setLoading(true);
     const res = await fetch("/api/task-list", {
       method: "POST",
@@ -80,6 +80,10 @@ const page = () => {
     const data = await res.json();
     if (res?.ok) {
       setLoading(false);
+      // addNotification(
+      //   taskForm.taskassignee,
+      //   ", You have one new task assigned."
+      // );
       router.push("/");
     } else if (res.status === 400) {
       setError(data.message);
